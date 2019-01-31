@@ -5,21 +5,25 @@ using UnityEngine;
 public class Cube : MonoBehaviour
 {
 
-    public void up(float height, float upCubeSpeed) {
-        StartCoroutine(movement(height,upCubeSpeed));
-    }
 
-    IEnumerator movement(float height, float upCubeSpeed) {
-        float Movement = transform.position.y;
-        while (transform.position.y <= height)
+    public bool up(float height, float upCubeSpeed) {
+        
+        transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
+
+        if (transform.position.y >= height)
         {
-
-            transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
-            yield return null;
+            transform.position = new Vector3(transform.position.x, height, transform.position.z);
+            return true;
+        }
+        else
+        {
+            return false;
         }
         //Debug.Log("Movement Cube:" + (transform.position.y - Movement));
-        transform.position = new Vector3(transform.position.x, height, transform.position.z);
+        
     }
+
+    
 
     public float getPositionY() {
         return transform.position.y;

@@ -10,38 +10,54 @@ public class Controller : MonoBehaviour
     public float speedRotate = 41.5f;
     [Range(1, 50)]
     public int upCubeSpeed = 16;
-    private float height;
+    private float height = 0f;
     public float speedGlobal = 1f;
+    private int counter = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(upCube());
-        
+        height = cubes[cubes.Length-1].transform.position.y + 0.5f;
+        //StartCoroutine(upCube());
+        StartCoroutine(Counter());
     }
 
-    IEnumerator upCube() {
-        float height = cubes[cubes.Length-1].gameObject.transform.position.y;
-        do
+    IEnumerator Counter()
+    {
+        while (true)
         {
-            foreach (Cube cube in cubes)
+            float counterPast = counter;
+            yield return new WaitForSecondsRealtime(1f);
+            //Debug.Log("Cubos movidos:" + (counter - counterPast));
+        }
+    }
+
+    void upCube() {
+
+        if (cubes[counter].up(height, upCubeSpeed))
+        {
+            height += 0.5f;
+            Debug.Log("Diferencia:" + (sun.transform.position.y - cubes[counter].gameObject.transform.position.y));
+            if (counter + 1 == cubes.Length)
             {
-                height += 0.5f;
-                cube.up(height, upCubeSpeed);
-                do
-                {
-                    yield return null;
-                } while (cube.getPositionY() != height);
-                
-                Debug.Log("Distancia"+(cube.gameObject.transform.position.y-sun.transform.position.y));
+                counter = 0;
             }
-        } while (true);
+            else
+            {
+                counter++;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        upCube();
+        transform.position = new Vector3(transform.position.x, sun.transform.position.y, transform.position.z);
     }
 
     void FixedUpdate()
     {
-        GameObject.Find("Cubes").transform.Rotate(new Vector3(0, -1f, 0)*speedRotate* Time.deltaTime);
         //transform.RotateAround(sun.transform.position, Vector3.up, speedRotate*Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, sun.transform.position.y, transform.position.z);
+        
     }
 }
