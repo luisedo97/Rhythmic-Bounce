@@ -35,7 +35,7 @@ public class Sun : MonoBehaviour
             float Movement = transform.position.y;
             do
             {
-                transform.Translate(Vector3.up * Time.deltaTime);
+                transform.position += Vector3.up * speed * Time.deltaTime;
                 yield return null;
             } while (transform.position.y <= height);
             //Debug.Log("Movement Sun:" + (transform.position.y - Movement));
