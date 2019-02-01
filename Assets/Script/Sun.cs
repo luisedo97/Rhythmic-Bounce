@@ -23,18 +23,19 @@ public class Sun : MonoBehaviour
         while (true)
         {
             float yActual = transform.position.y;
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
             //Debug.Log("Desplazamiento:" + (transform.position.y - yActual));
         }
     }
 
     void sunMovement()
     {
-
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
-        if (transform.position.y > yAux) {
-            transform.position = Vector3.up * yAux;
+        transform.position = Vector3.MoveTowards(transform.position, Vector3.up*yAux, Time.deltaTime * speed);
+        
+        //transform.Translate(Vector3.up * speed * Time.deltaTime);
+        if (transform.position.y == yAux) {
+            //transform.position = Vector3.up * yAux;
             yAux += speed;
-        } 
+        }
     }
 }

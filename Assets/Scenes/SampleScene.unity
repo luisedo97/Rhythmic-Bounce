@@ -877,7 +877,7 @@ MonoBehaviour:
   - {fileID: 816400631}
   - {fileID: 226729635}
   speedRotate: 22.25
-  upCubeSpeed: 8.115
+  upCubeSpeed: 8
   speedGlobal: 1
 --- !u!1 &545032262
 GameObject:

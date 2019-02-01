@@ -8,11 +8,12 @@ public class Cube : MonoBehaviour
 
     public bool up(float height, float upCubeSpeed) {
         
-        transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
+        //transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x,height,transform.position.z), Time.deltaTime * upCubeSpeed);
 
-        if (transform.position.y >= height)
+        if (transform.position.y == height)
         {
-            transform.position = new Vector3(transform.position.x, height, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, height, transform.position.z);
             return true;
         }
         else

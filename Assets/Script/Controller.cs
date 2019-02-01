@@ -53,7 +53,9 @@ public class Controller : MonoBehaviour
     {
         upCube();
         transform.position = new Vector3(transform.position.x, sun.transform.position.y, transform.position.z);
+        GameObject.Find("Cubes").transform.Rotate(Vector3.up*-speedRotate*Time.deltaTime);
     }
+
 
     void FixedUpdate()
     {
