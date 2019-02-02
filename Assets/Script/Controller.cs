@@ -1,31 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
-    public GameObject sun;
-    
-    
-    public float speedGlobal = 1f;
+    public float speedGlobal;
+    public float multipliquer = 0f;
+    public TextMeshProUGUI score;
 
-
-    void Start()
+    private void Awake()
     {
-
+        score = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();       
     }
 
     private void Update()
     {
-        //upCube();
-        transform.position = new Vector3(transform.position.x, sun.transform.position.y, transform.position.z);
-        
+        multipliquer = GameObject.Find("Scrollbar").GetComponent<Scrollbar>().value;
+        Debug.Log("Multipliquer:"+multipliquer);
+        speedGlobal = 1 + multipliquer;
     }
 
-
-    void FixedUpdate()
+    public void jump(int countBouncing)
     {
-        //transform.RotateAround(sun.transform.position, Vector3.up, speedRotate*Time.deltaTime);
-        
+        score.SetText(""+countBouncing);
     }
+
 }

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-
+    private void Start()
+    {
+                
+    }
 
     public bool up(float height, float upCubeSpeed) {
-        
+
         //transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x,height,transform.position.z), Time.deltaTime * upCubeSpeed);
+        Vector3 step = new Vector3(transform.position.x, height, transform.position.z);
+
+        transform.position = Vector3.MoveTowards(transform.position, step, Time.deltaTime * upCubeSpeed);
 
         if (transform.position.y == height)
         {

@@ -6,14 +6,29 @@ public class Player : MonoBehaviour
 {
     public float thrust = 10f;
     public bool isGrounded = false;
+    public int countBouncing = 0;
+    private Controller controller;
 
-    void Update()
+    private void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
+        controller = GameObject.Find("Controller").GetComponent<Controller>();
+    }
+
+    private void Update()
+    {
+        Jump();
+    }
+
+    public void Jump() {
+        if (isGrounded)
+        {
+            countBouncing++;
+            controller.jump(countBouncing);
+            Rigidbody rb = GetComponent<Rigidbody>();
             Debug.Log("Space");
-            rb.AddForce(transform.up*thrust, ForceMode.Impulse);
-        }       
+            rb.AddForce(transform.up * thrust, ForceMode.Impulse);
+            isGrounded = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,8 +36,4 @@ public class Player : MonoBehaviour
         isGrounded = true;
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        isGrounded = false;
-    }
 }

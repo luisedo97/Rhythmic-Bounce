@@ -6,16 +6,18 @@ public class Sun : MonoBehaviour
 {
     public float speed = 1f;
     private float yAux;
-
-    void Update()
-    {
-        sunMovement();
-    }
+    private Controller controller;
 
     private void Start()
     {
         StartCoroutine("Counter");
         yAux = transform.position.y + speed;
+        controller = GameObject.Find("Controller").GetComponent<Controller>();
+    }
+
+    void Update()
+    {
+        sunMovement();
     }
 
     IEnumerator Counter()
@@ -30,7 +32,7 @@ public class Sun : MonoBehaviour
 
     void sunMovement()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Vector3.up*yAux, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, Vector3.up*yAux, Time.deltaTime * speed * controller.speedGlobal);
         
         //transform.Translate(Vector3.up * speed * Time.deltaTime);
         if (transform.position.y == yAux) {
