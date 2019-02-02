@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     public int countBouncing = 0;
     private Controller controller;
+    public Joystick joystick;
 
     private void Start()
     {
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Jump();
+        transform.position = new Vector3(joystick.Horizontal, transform.position.y, transform.position.z);
     }
 
     public void Jump() {
