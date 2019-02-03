@@ -19,6 +19,7 @@ public class Cube : MonoBehaviour
         if (transform.position.y == height)
         {
             //transform.position = new Vector3(transform.position.x, height, transform.position.z);
+            
             return true;
         }
         else
@@ -28,8 +29,6 @@ public class Cube : MonoBehaviour
         //Debug.Log("Movement Cube:" + (transform.position.y - Movement));
         
     }
-
-    
 
     public float GetPositionY() {
         return transform.position.y;

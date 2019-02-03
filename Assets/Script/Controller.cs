@@ -30,7 +30,7 @@ public class Controller : MonoBehaviour
         {
             if (!gameIsPause) {
                 speedGlobal += 0.01f;
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(2f);
             }
         }
     }
