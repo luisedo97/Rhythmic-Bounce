@@ -9,7 +9,7 @@ public class Cube : MonoBehaviour
                 
     }
 
-    public bool up(float height, float upCubeSpeed) {
+    public bool Up(float height, float upCubeSpeed) {
 
         //transform.position += Vector3.up * upCubeSpeed * Time.deltaTime;
         Vector3 step = new Vector3(transform.position.x, height, transform.position.z);
@@ -31,7 +31,7 @@ public class Cube : MonoBehaviour
 
     
 
-    public float getPositionY() {
+    public float GetPositionY() {
         return transform.position.y;
     }
 

@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         if (isGrounded)
         {
             countBouncing++;
-            controller.jump(countBouncing);
+            controller.Jump(countBouncing);
             Rigidbody rb = GetComponent<Rigidbody>();
             Debug.Log("Space");
             rb.AddForce(transform.up * thrust, ForceMode.Impulse);

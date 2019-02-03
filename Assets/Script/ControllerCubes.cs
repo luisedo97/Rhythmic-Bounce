@@ -17,19 +17,24 @@ public class ControllerCubes : MonoBehaviour
     void Awake()
     {
         controller = GameObject.Find("Controller").GetComponent<Controller>();
+    }
+
+    private void Start()
+    {
+        
         height = cubes[cubes.Length - 1].transform.position.y + 0.5f;
     }
 
     void Update()
     {
-        upCube();
+        UpCube();
         transform.Rotate(Vector3.up * -speedRotate * Time.deltaTime * controller.speedGlobal);
     }
 
 
-    void upCube()
+    void UpCube()
     {
-        if (cubes[counter].up(height, upCubeSpeed * controller.speedGlobal))
+        if (cubes[counter].Up(height, upCubeSpeed * controller.speedGlobal))
         {
             height += 0.5f;
             if (counter + 1 == cubes.Length)

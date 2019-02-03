@@ -17,7 +17,7 @@ public class Sun : MonoBehaviour
 
     void Update()
     {
-        sunMovement();
+        SunMovement();
     }
 
     IEnumerator Counter()
@@ -30,7 +30,7 @@ public class Sun : MonoBehaviour
         }
     }
 
-    void sunMovement()
+    void SunMovement()
     {
         transform.position = Vector3.MoveTowards(transform.position, Vector3.up*yAux, Time.deltaTime * speed * controller.speedGlobal);
         
