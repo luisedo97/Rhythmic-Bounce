@@ -62,33 +62,33 @@ public class ControllerCubes : MonoBehaviour
                 counter++;
             }
         }
-    }
+    } 
 
     void RandomChangeCube(Cube cube)
     {
-        int random = Random.Range(0, 12);
-
+        int random = Random.Range(0, 10);
         switch (random) {
+                //Caso de que se vuelva mediano
             case 0:
-                cube.transform.localScale = Vector3.one / 3f;
+                cube.changeScale("Medium");
                 break;
             case 1:
-                cube.transform.localScale = Vector3.one / 2f;
-                break;
+                goto case 0;
             case 2:
-                cube.transform.localScale = Vector3.one / 2f;
-                break;
+                goto case 1;
+                //Caso de que se vuelva peque;o
             case 3:
-                cube.transform.localScale = Vector3.one / 1.5f;
+                cube.changeScale("Low");
                 break;
             case 4:
-                cube.transform.localScale = Vector3.one / 1.5f;
-                break;
+                goto case 3;
+                //Caso de que se vuelva micro
             case 5:
-                cube.transform.localScale = Vector3.one / 1.5f;
+                cube.changeScale("Micro");
                 break;
+                //Caso de que se vuelva normal
             default:
-                cube.transform.localScale = Vector3.one;
+                cube.changeScale("Normal");
                 break;
         }
     }

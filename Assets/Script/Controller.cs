@@ -7,15 +7,34 @@ using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
+    //Speed
     public float speedGlobal = 1f;
-    public TextMeshProUGUI score;
-    public GameObject pause;
+    //UI
+    public TextMeshProUGUI scoreUI;
+    public GameObject pauseUI;
+    public GameObject gameOverUI;
+    public GameObject gameUI;
+    //State
     public bool gameIsPause = false;
-
+    //Score
+    private int score;
 
     private void Start()
     {
         StartCoroutine(SpeedIncrease());
+        
+        if (SceneManager.GetActiveScene().name == "Menu") {
+            int highScore = PlayerPrefs.GetInt("HighScore", 0);
+            GameObject highScoreUI = GameObject.Find("High Score");
+            if (highScore != 0)
+            {
+                highScoreUI.GetComponent<TextMeshProUGUI>().SetText("Best: " + highScore);
+            }
+            else
+            {
+                highScoreUI.SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -35,9 +54,29 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public void Jump(int countBouncing)
+    public void Jump()
     {
-        score.SetText(""+countBouncing);
+        score++;
+        scoreUI.SetText(""+score);
+    }
+
+    public void GameOver()
+    {
+        //Debug.Log("HACELO!");
+        //Time.timeScale = 0f;
+        gameOverUI.SetActive(true);
+
+        int highscore = PlayerPrefs.GetInt("HighScore",0);
+
+        if (score > highscore) {
+            highscore = score;
+            PlayerPrefs.SetInt("HighScore", score);
+            GameObject.Find("Message_Text").GetComponent<TextMeshProUGUI>().SetText("New Record");
+        }
+        
+        GameObject.Find("Score").GetComponent<TextMeshProUGUI>().SetText(score+"");
+        GameObject.Find("Best").GetComponent<TextMeshProUGUI>().SetText(highscore + "");
+        gameUI.SetActive(false);
     }
 
 
@@ -47,27 +86,28 @@ public class Controller : MonoBehaviour
         {
             //Resume
             gameIsPause = false;
-            pause.SetActive(false);
+            pauseUI.SetActive(false);
             Time.timeScale = 1f;
         }
         else
         {
             //Pause
             gameIsPause = true;
-            pause.SetActive(true);
+            pauseUI.SetActive(true);
             Time.timeScale = 0f;
         }
     }
 
     public void LoadMenu()
     {
-        Debug.Log("Load Menu...");
+        //Debug.Log("Load Menu...");
         SceneManager.LoadScene("Menu");
     }
 
     public void RefreshGame()
     {
-        Debug.Log("Refresh Game...");
+        //Debug.Log("Refresh Game...");
+        DontDestroyOnLoad(GameObject.Find("Audio"));
         Time.timeScale = 1f;
         SceneManager.LoadScene("Game");
     }

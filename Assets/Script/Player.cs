@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public float thrust = 10f;
     public bool isGrounded = false;
-    public int countBouncing = 0;
+    //public int countBouncing = 0;
     private Controller controller;
     public Joystick joystick;
 
@@ -25,12 +25,20 @@ public class Player : MonoBehaviour
     public void Jump() {
         if (isGrounded)
         {
-            countBouncing++;
-            controller.Jump(countBouncing);
+            //countBouncing++;
+            controller.Jump();
             Rigidbody rb = GetComponent<Rigidbody>();
-            Debug.Log("Space");
+            //Debug.Log("Space");
             rb.AddForce(transform.up * thrust, ForceMode.Impulse);
             isGrounded = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Finish")
+        {
+            controller.GameOver();
         }
     }
 
