@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
         controller = GameObject.Find("Controller").GetComponent<Controller>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Jump();
         transform.position = new Vector3(joystick.Horizontal, transform.position.y, transform.position.z);

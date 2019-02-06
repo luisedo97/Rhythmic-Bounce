@@ -107,7 +107,9 @@ public class Controller : MonoBehaviour
     public void RefreshGame()
     {
         //Debug.Log("Refresh Game...");
-        DontDestroyOnLoad(GameObject.Find("Audio"));
+        if (GameObject.Find("Audio")!=null) {
+            DontDestroyOnLoad(GameObject.Find("Audio"));
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene("Game");
     }

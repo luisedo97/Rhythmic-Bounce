@@ -27,7 +27,7 @@ public class ControllerCubes : MonoBehaviour
         height = cubes[cubes.Length - 1].transform.position.y + 0.5f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         UpCube();
         RotateCube();
@@ -36,11 +36,16 @@ public class ControllerCubes : MonoBehaviour
         //Debug.Log(-(360 / (16f * controller.speedGlobal)));
     }
 
+    Quaternion deltaRotation;
+
     void RotateCube()
     {
-        transform.Rotate(Vector3.up, -(360 / (16.07f)) * controller.speedGlobal * Time.deltaTime);
+        //transform.Rotate(Vector3.up, -(360 / (16.07f)) * controller.speedGlobal * Time.deltaTime);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        deltaRotation = Quaternion.Euler(Vector3.up * -((360 / (16f))-errorTimeSg) * controller.speedGlobal * Time.deltaTime);
+        Debug.Log(deltaRotation*rb.rotation);
+        rb.MoveRotation(deltaRotation*rb.rotation);
     }
-
 
     void UpCube()
     {
@@ -53,8 +58,8 @@ public class ControllerCubes : MonoBehaviour
             {
                 counter = 0;
                 counterLap++;
-                errorTimeSg = (Time.time - (int)(Time.time))/counterLap;
-                Debug.Log("Error Time sg:" + errorTimeSg);
+                errorTimeSg = ((Time.time - (int)(Time.time)))/counterLap;
+                //Debug.Log("Counter Lap" + counterLap);
             }
             else
             {

@@ -26,7 +26,7 @@ public class FixedJoystick : Joystick
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        inputVector = Vector2.zero;
-        handle.anchoredPosition = Vector2.zero;
+        //inputVector = Vector2.zero;
+        //handle.anchoredPosition = Vector2.zero;
     }
 }
